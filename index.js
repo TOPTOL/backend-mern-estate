@@ -4,6 +4,8 @@ import dotenv from 'dotenv';
 import userRouter from './routes/user.routes.js';
 import authRouter from './routes/auth.routes.js';
 dotenv.config();
+import cors from 'cors';
+
 
 mongoose
     .connect(process.env.MONGO)
@@ -16,14 +18,15 @@ mongoose
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
-app.listen(3500,() => {
+app.listen(3500, () => {
     console.log('server is running on port 3500');
     }
 );
 
-app.use('/ api/user', userRouter);
+app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
 
 
